@@ -1,3 +1,4 @@
+import os
 from otter.plugins import AbstractOtterPlugin
 import gspread
 import copy
