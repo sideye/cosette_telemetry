@@ -4,6 +4,7 @@ import gspread
 import copy
 import re
 import json
+import tempfile
 import pandas as pd
 
 class CosetteTelemetryPlugin(AbstractOtterPlugin):
