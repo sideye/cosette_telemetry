@@ -54,7 +54,7 @@ class CosetteTelemetryPlugin(AbstractOtterPlugin):
 
         self._load_df()
 
-        self._df.append({'data': output}, ignore_index = True)
+        self._df = self._df.append({'data': output}, ignore_index = True)
 
         self.worksheet.update([self._df.columns.values.tolist()] + self._df.values.tolist())
 
