@@ -28,7 +28,7 @@ class CosetteTelemetryPlugin(AbstractOtterPlugin):
         sheet_url = self.plugin_config["sheet_url"]
         sheet = gc.open_by_url(sheet_url)
         self.worksheet = sheet.get_worksheet(0)
-        data = worksheet.get_all_values()
+        data = self.worksheet.get_all_values()
         colnames = data.pop(0)
 
         self._df = pd.DataFrame(data, columns=colnames)
