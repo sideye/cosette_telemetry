@@ -53,12 +53,17 @@ class CosetteTelemetryPlugin(AbstractOtterPlugin):
         output = {'queries': self.data, 'results': results}
         output = json.dumps(output)
 
-        time.sleep(random.randint(1, 35) * 60)
-        self._load_df()
 
-        self._df = self._df.append({'data': output}, ignore_index = True)
-
-        self.worksheet.update([self._df.columns.values.tolist()] + self._df.values.tolist())
+        success = False
+        while not success:
+            try:
+                self._load_df()
+                self._df = self._df.append({'data': output}, ignore_index = True)
+                self.worksheet.update([self._df.columns.values.tolist()] + self._df.values.tolist())
+                success = True
+            except:
+                time.sleep(random.randint(1, 35) * 60)
+        
 
     def during_generate(self, otter_config, assignment):
         """
