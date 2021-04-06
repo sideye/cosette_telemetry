@@ -6,6 +6,8 @@ import re
 import json
 import tempfile
 import pandas as pd
+import time
+import random
 
 class CosetteTelemetryPlugin(AbstractOtterPlugin):
 
@@ -51,7 +53,7 @@ class CosetteTelemetryPlugin(AbstractOtterPlugin):
         output = {'queries': self.data, 'results': results}
         output = json.dumps(output)
 
-
+        time.sleep(random.randint(1, 35) * 60)
         self._load_df()
 
         self._df = self._df.append({'data': output}, ignore_index = True)
