@@ -42,11 +42,14 @@ class CosetteTelemetryPlugin(AbstractOtterPlugin):
     def after_grading(self, results):
         results = copy.deepcopy(results)
         to_delete = []
+        ok = []
         for key in results.results:
             for test in self.data:
-                if not re.search(rf"""\b{test}\b""", key) and key not in to_delete:
+                if not re.search(rf"""\b{test}\b""", key) and key not in to_delete and key not in ok:
                     # results.results.pop(key)
                     to_delete.append(key)
+                else:
+                    ok.append(key)
         for key in to_delete:
             results.results.pop(key)
         results = results.to_gradescope_dict({})
